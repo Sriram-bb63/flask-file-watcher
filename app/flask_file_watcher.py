@@ -71,7 +71,6 @@ class FileWatcher():
                 else:
                     filesToWatch.append(file)
                     subFiles = [f for f in list(file.rglob("*"))]
-                    # subFiles = [f for f in list(file.rglob("*")) if "__pycache__" not in f.parts]
                     filesToWatch += subFiles
         if ignore in [[], ["*"], "*", None]:
             pass
