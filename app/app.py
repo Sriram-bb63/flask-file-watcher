@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_file_watcher import FileWatcher
+from flask_file_watcher.flask_file_watcher import FileWatcher
 
 app = Flask(__name__)
 

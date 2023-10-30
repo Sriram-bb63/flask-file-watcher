@@ -72,6 +72,7 @@ class FileWatcher():
                     filesToWatch.append(file)
                     subFiles = [f for f in list(file.rglob("*"))]
                     filesToWatch += subFiles
+        ignore.append("flask_file_watcher")
         if ignore in [[], ["*"], "*", None]:
             pass
         else:

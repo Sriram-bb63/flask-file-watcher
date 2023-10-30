@@ -15,4 +15,5 @@
 - [ ] Test in linux
 - [ ] In linux, it creates .swp file if open
 - [ ] https://stackoverflow.com/questions/34361035/python-thread-name-doesnt-show-up-on-ps-or-htop
-- [ ] Restructure
+- [x] Restructure
+- [x] Ignore file watcher files
