@@ -7,7 +7,6 @@ fw = FileWatcher(app)
 
 @app.route("/")
 def index():
-    # reload_app()
     return "sdfsdf"
 
 
