@@ -13,7 +13,9 @@
 - [x] Verify if `__pycache__` is ignored
 - [x] Ignore list
 - [ ] Test in linux
-- [ ] In linux, it creates .swp file if open
+- [x] In linux, it creates .swp file if open
 - [ ] https://stackoverflow.com/questions/34361035/python-thread-name-doesnt-show-up-on-ps-or-htop
 - [x] Restructure
 - [x] Ignore file watcher files
+- [x] Add gitignore
+- [ ] Bugs in ignore part if the file cannot be found in the list

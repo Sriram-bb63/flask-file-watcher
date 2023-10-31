@@ -12,7 +12,6 @@ def index():
 
 if __name__ == "__main__":
     fw.Watch(
-        watch=[".", "templates", "static"],
-        ignore=["__pycache__"]
+        watch=[".", "templates", "static"]
     )
     app.run(debug=True)

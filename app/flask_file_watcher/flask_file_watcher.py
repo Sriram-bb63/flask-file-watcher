@@ -2,7 +2,6 @@ import os
 import time
 import threading
 import pathlib
-from flask import current_app
 
 def watchFile(path):
     # See if file exists, else return and close thread
@@ -18,12 +17,13 @@ def watchFile(path):
                 if newFile == []:
                     return
                 newFilePath = pathlib.Path(os.path.join(path, newFile[0]))
-                print(f"FILE CREATED - {newFilePath}")
-                newFileThread = threading.Thread(target=watchFile, args=(newFilePath,), name=f"fileWatchThread-{newFile}")
-                newFileThread.setDaemon(True)
-                newFileThread.start()
-                lastModified = newModified
-                lastSubFiles = newSubFiles
+                if newFilePath.suffix != ".swp":
+                    print(f"FILE CREATED - {newFilePath}")
+                    newFileThread = threading.Thread(target=watchFile, args=(newFilePath,), name=f"fileWatchThread-{newFile}")
+                    newFileThread.setDaemon(True)
+                    newFileThread.start()
+                    lastModified = newModified
+                    lastSubFiles = newSubFiles
     else:
         try:
             lastModified = os.path.getmtime(path)
@@ -48,7 +48,9 @@ class FileWatcher():
             self.cwd = os.getcwd()
             self.files = []
 
-    def Watch(self, watch, ignore):
+    def Watch(self, watch, ignore=[]):
+        watch = list(set(watch))
+        ignore = list(set(ignore))
         self.filesToWatch = self.__getFilesToWatch(watch, ignore)
         print("FILES WATCHED:")
         for file in self.filesToWatch:
@@ -70,10 +72,10 @@ class FileWatcher():
                     filesToWatch.append(file)
                 else:
                     filesToWatch.append(file)
-                    subFiles = [f for f in list(file.rglob("*"))]
+                    subFiles = [f for f in list(file.rglob("*")) if f.suffix != ".swp"]
                     filesToWatch += subFiles
-        ignore.append("flask_file_watcher")
-        if ignore in [[], ["*"], "*", None]:
+        ignore += ["flask_file_watcher", "__pycache__", "venv"]
+        if ignore in [[], None]:
             pass
         else:
             cwd = os.getcwd()
